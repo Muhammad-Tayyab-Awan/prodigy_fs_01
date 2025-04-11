@@ -1,3 +1,23 @@
 .peer:not(:focus-visible):not(:placeholder-shown) ~ * {
   display: none;
 }
+#hero-section > img {
+  content: url("/images/hero_section_img_1.png");
+  animation-name: carousel-animation;
+  animation-duration: 15s;
+  animation-delay: 0ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+@keyframes carousel-animation {
+  0% {
+    content: url("/images/hero_section_img_1.png");
+  }
+  50% {
+    content: url("/images/hero_section_img_2.png");
+  }
+  100% {
+    content: url("/images/hero_section_img_3.png");
+  }
+}
