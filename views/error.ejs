@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An error occurred</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="bg-amber-400 min-h-screen w-full flex flex-col justify-start items-center pt-20 gap-10">
+    <div
+        class="flex justify-center items-center gap-3 bg-white p-2 ring rounded-xl shadow-md shadow-black animate-pulse">
+        <img src="/icons/error.svg" alt="error" class="h-10">
+        <span class="text-lg font-medium">An error occurred</span>
+    </div>
+    <div class="bg-white w-[80%] p-4 rounded-sm max-w-[1380px]">
+        <h1 class="text-lg">
+            <%= error %>
+        </h1>
+        <p class="text-justify text-red-500 font-medium mt-4">
+            <%= message %>
+        </p>
+    </div>
+    <span
+        class="reloadBtn p-1.5 bg-black text-white rounded-md cursor-pointer hover:bg-black/80 flex justify-center items-center gap-0.5 text-xs"><img
+            src="/icons/reload.png" alt="reload" class="h-4">Reload</span>
+</body>
+<script src="/js/app.js"></script>
+
+</html>
