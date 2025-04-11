@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageRequested %> - Page Not Found
+    </title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="shortcut icon" href="/icons/icon.png" type="image/png">
+</head>
+
+<body class="bg-amber-400 min-h-screen w-full flex flex-col justify-center items-center relative">
+    <a href="/"><img src="/icons/arrow.png" alt="back-to-home"
+            class="w-14 absolute top-8 left-[calc(50vw-1.75rem)] rotate-180"></a>
+    <div class="flex justify-center items-center flex-col">
+        <p class="font-medium uppercase text-center">Oops.. page not found</p>
+        <h1 class="text-[12rem] text-red-700  text-center font-bold leading-[12rem] mb-6">
+            404</h1>
+        <p class="font-medium uppercase text-center">Page you are requesting for is not found</p>
+    </div>
+</body>
+
+</html>
