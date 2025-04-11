@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const connectDB = require("./utils/connectDB");
+const verifyLogin = require("./middleware/verifyLogin.js");
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
@@ -13,9 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 
+app.use(verifyLogin);
+
 app.get("/", (req, res) => {
   try {
-    res.render("index", { loggedIn: false });
+    const { userStatus } = req;
+    res.render("index", userStatus);
   } catch (error) {
     res.render("error", {
       error: "Sever side error occurred",
@@ -26,7 +30,6 @@ app.get("/", (req, res) => {
 
 app.all(/(.*)/, (req, res) => {
   const pageRequested = req.path.slice(1);
-  console.log(pageRequested);
   res.render("not-found", { pageRequested });
 });
 
