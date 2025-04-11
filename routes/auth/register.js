@@ -20,19 +20,21 @@ router.get("/", async (req, res) => {
 
 router.post(
   "/",
-  body("username")
-    .matches(/^(?=.*[a-z])(?=.*\d)[a-z\d]+$/)
-    .isLength({ min: 6, max: 20 }),
-  body("email").isEmail(),
-  body("password")
-    .isStrongPassword({
-      minLowercase: 3,
-      minUppercase: 2,
-      minNumbers: 2,
-      minSymbols: 1,
-      minLength: 8
-    })
-    .isLength({ max: 18 }),
+  [
+    body("username")
+      .matches(/^(?=.*[a-z])(?=.*\d)[a-z\d]+$/)
+      .isLength({ min: 6, max: 20 }),
+    body("email").isEmail(),
+    body("password")
+      .isStrongPassword({
+        minLowercase: 3,
+        minUppercase: 2,
+        minNumbers: 2,
+        minSymbols: 1,
+        minLength: 8
+      })
+      .isLength({ max: 18 })
+  ],
   async (req, res) => {
     try {
       const { userStatus } = req;
