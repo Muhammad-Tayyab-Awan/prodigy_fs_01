@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Now - Roluthentify</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="shortcut icon" href="/icons/icon.png" type="image/png">
+</head>
+
+<body class="flex min-h-screen justify-center w-full bg-[url('/icons/icon.png')] bg-no-repeat bg-contain bg-center">
+    <div
+        class="bg-white/20 backdrop-blur-xs h-fit rounded-md w-96 ring-1 mt-20 py-2 flex flex-col justify-center items-center gap-4">
+        <h1 class="text-lg font-medium text-center py-2">Register Now</h1>
+        <form action="/register" method="POST" class="w-[90%] flex justify-center items-center gap-2 flex-col"
+            id="register">
+            <div class="relative w-full flex text-sm">
+                <input type="text" name="username" id="username" placeholder="" required
+                    pattern="^(?=.*[a-z])(?=.*\d)[a-z\d]+$" title="Must contain lowercase letters and numbers"
+                    minlength="6" maxlength="20"
+                    class="peer w-full py-2 px-4 bg-white/30 backdrop-blur-sm rounded-md focus-visible:outline-hidden focus-visible:ring-0 ring-1 transition-all duration-700 ease-in-out"
+                    autocomplete="additional-name" autofocus>
+                <label for="username"
+                    class="absolute peer-focus-visible:-top-2 h-auto self-center left-4 tracking-wider z-10 text-sm peer">Username</label>
+            </div>
+            <div class="relative w-full flex text-sm">
+                <input type="email" name="email" id="email" placeholder="" required
+                    class="peer w-full py-2 px-4 bg-white/30 backdrop-blur-sm rounded-md focus-visible:outline-hidden focus-visible:ring-0 ring-1 transition-all duration-700 ease-in-out"
+                    autocomplete="email">
+                <label for="email"
+                    class="absolute peer-focus-visible:-top-2 h-auto self-center left-4 tracking-wider z-10 text-sm peer">Email</label>
+            </div>
+            <div class="relative w-full flex text-sm">
+                <input type="password" name="password" id="password" placeholder="" required minlength="8"
+                    maxlength="18"
+                    class="peer w-full py-2 px-4 bg-white/30 backdrop-blur-sm rounded-md focus-visible:outline-hidden focus-visible:ring-0 ring-1 transition-all duration-700 ease-in-out"
+                    autocomplete="new-password"
+                    pattern="^(?=(?:.*[a-z]){3,})(?=(?:.*[A-Z]){2,})(?=(?:.*\d){2,})(?=(?:.*[^a-zA-Z\d]){1,}).+$"
+                    title="Must contain at least 3 lowercase letters, 2 uppercase letters, 2 numbers, and 1 symbol">
+                <label for="password"
+                    class="absolute peer-focus-visible:-top-2 h-auto self-center left-4 tracking-wider z-10 text-sm peer">Password</label>
+            </div>
+            <div class="relative w-full flex text-sm">
+                <input type="password" id="cPassword" placeholder="" required minlength="8" maxlength="18"
+                    class="peer w-full py-2 px-4 bg-white/30 backdrop-blur-sm rounded-md focus-visible:outline-hidden focus-visible:ring-0 ring-1 transition-all duration-700 ease-in-out"
+                    autocomplete="new-password"
+                    pattern="^(?=(?:.*[a-z]){3,})(?=(?:.*[A-Z]){2,})(?=(?:.*\d){2,})(?=(?:.*[^a-zA-Z\d]){1,}).+$"
+                    title="Must contain at least 3 lowercase letters, 2 uppercase letters, 2 numbers, and 1 symbol">
+                <label for="cPassword"
+                    class="absolute peer-focus-visible:-top-2 h-auto self-center left-4 tracking-wider z-10 text-sm peer">Confirm
+                    Password</label>
+            </div>
+            <div class="w-full flex pl-4 items-center justify-start gap-4 text-sm">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to <a href="/terms">terms & conditions</a> of Roluthentify</label>
+            </div>
+            <div class="w-full flex pl-4 items-center justify-start gap-4 text-sm">
+                <input type="checkbox" id="privacy-policy" required>
+                <label for="privacy-policy">I agree to <a href="/privacy-policy">privacy policy</a>of
+                    Roluthentify</label>
+            </div>
+            <button
+                class="bg-black text-white p-2 mt-2 text-sm rounded-sm cursor-pointer focus-visible:outline-hidden">Register</button>
+        </form>
+        <p class="text-sm mb-2">Already have account? <a href="/login">Login</a></p>
+    </div>
+</body>
+<script src="/js/app.js"></script>
+
+</html>
