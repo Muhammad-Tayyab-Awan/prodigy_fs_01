@@ -6,25 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roluthentify - Role based application guide</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="shortcut icon" href="/icons/icon.png" type="image/png">
 </head>
 
 <body>
-    <header class="bg-amber-400 text-black w-full py-2 px-4 flex items-center justify-between shadow-md shadow-black">
+    <header class="bg-amber-400 text-black w-full py-2 px-4 flex items-center justify-between">
         <div class="flex items-center justify-center gap-2">
             <img src="/icons/icon.png" alt="logo" class="h-10 rounded-full">
             <a href="/" class="text-2xl text-white font-medium">Roluthentify</a>
         </div>
         <nav class="flex justify-center item-center gap-6 text-lg font-medium">
-            <a href="/guide" class="hover:text-white transition-colors duration-700 ease-in-out">Guide</a>
-            <a href="/about" class="hover:text-white transition-colors duration-700 ease-in-out">About</a>
-            <a href="/contact" class="hover:text-white transition-colors duration-700 ease-in-out">Contact</a>
+            <% if (loggedIn) {%>
+                <a href="/guide" class="hover:text-white transition-colors duration-700 ease-in-out">Guide</a>
+                <% } %>
+                    <a href="/about" class="hover:text-white transition-colors duration-700 ease-in-out">About</a>
+                    <a href="/contact" class="hover:text-white transition-colors duration-700 ease-in-out">Contact</a>
         </nav>
         <div class="flex justify-center items-center gap-1 relative">
             <% if (loggedIn) { %>
                 <img src="/icons/user.svg" alt="user" class="userAccountToggler h-8 w-8 cursor-pointer">
                 <div id="user-dropdown"
-                    class="flex-col justify-center items-center absolute top-[120%] text-xs hidden bg-white ring-1 rounded-sm">
+                    class="flex-col justify-center items-center absolute top-[120%] text-xs hidden bg-white ring-1 rounded-sm z-10">
                     <a href="/profile"
                         class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full rounded-t-sm">Profile</a>
                     <% if (role==="admin" ) {%>
@@ -41,6 +44,50 @@
         </div>
     </header>
     <main class="min-h-[calc(100vh-6rem)] w-full">
+        <div id="hero-section" class="h-[calc(100vh-6rem)] w-full flex justify-center items-center relative">
+            <img alt="img" class="w-full h-full object-cover">
+            <div
+                class="absolute w-[80%] h-[90%] bg-white/70 backdrop-blur-[1px] flex flex-col gap-5 justify-center items-center rounded-sm">
+                <h1 class="text-3xl font-medium">
+                    <% if (loggedIn) {%>
+                        Welcome back, <%= username %>!
+                            <% } else { %>
+                                Welcome to Roluthentify!
+                                <% } %>
+                </h1>
+                <p class="text-justify w-[75%] leading-loose">
+                    Introducing <strong>Roluthentify</strong>, your go-to platform for building secure role-based
+                    authentication
+                    and
+                    authorization
+                    systems
+                    using JavaScript technologies. Whether you're working with Node.js, Express, React, or Next.js,
+                    <strong>Roluthentify</strong>
+                    offers
+                    step-by-step guides, real-world examples, and expert tips to help you implement user login, role
+                    assignment
+                    (like admin,
+                    editor, user), and protected route access with ease. Designed for developers of all levels, this
+                    platform
+                    breaks down
+                    complex authentication flows into practical, easy-to-follow tutorials. Perfect for creating secure
+                    dashboards, admin
+                    panels, or SaaS apps—Roluthentify helps you master user auth in modern JavaScript applications.
+                    Start
+                    building secure,
+                    scalable apps with confidence today!
+                </p>
+                <% if (loggedIn) {%>
+                    <a href="/guide"
+                        class="py-2 px-2.5 bg-amber-400 rounded-sm text-white font-medium hover:bg-amber-500 transition-colors duration-700 ease-in-out">Explore
+                        guide</a>
+                    <% } else { %>
+                        <a href="/login"
+                            class="py-2 px-2.5 bg-amber-400 rounded-sm text-white font-medium hover:bg-amber-500 transition-colors duration-700 ease-in-out">Join
+                            Now</a>
+                        <% } %>
+            </div>
+        </div>
     </main>
     <footer class="bg-amber-400 w-full px-4 py-2 flex justify-between items-center">
         <p>Copyright &copy; | <span id="year"></span> | Roluthentify.com</p>
