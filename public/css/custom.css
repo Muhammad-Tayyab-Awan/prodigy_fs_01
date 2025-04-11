@@ -1,0 +1,3 @@
+.peer:not(:focus-visible):not(:placeholder-shown) ~ * {
+  display: none;
+}
