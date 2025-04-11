@@ -2,6 +2,8 @@ const accountToggler = document.querySelector(".userAccountToggler");
 const userDropDown = document.querySelector("#user-dropdown");
 const reloadBtns = document.querySelectorAll(".reloadBtn");
 const register = document.querySelector("#register");
+const year = document.querySelector("#year");
+if (year) year.innerHTML = new Date().getFullYear();
 const toggleUserDropDown = () => {
   userDropDown.classList.toggle("hidden");
   userDropDown.classList.toggle("flex");
