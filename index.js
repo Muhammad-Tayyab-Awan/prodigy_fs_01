@@ -5,6 +5,8 @@ const app = express();
 const path = require("path");
 const connectDB = require("./utils/connectDB");
 const verifyLogin = require("./middleware/verifyLogin.js");
+const registerRoute = require("./routes/auth/register.js");
+const loginRoute = require("./routes/auth/login.js");
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
@@ -27,6 +29,9 @@ app.get("/", (req, res) => {
     });
   }
 });
+
+app.use("/register", registerRoute);
+app.use("/login", loginRoute);
 
 app.all(/(.*)/, (req, res) => {
   const pageRequested = req.path.slice(1);
