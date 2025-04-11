@@ -4,12 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Role Based Authentication System</title>
+    <title>Roluthentify - Role based application guide</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="shortcut icon" href="/icons/icon.png" type="image/png">
 </head>
 
 <body>
-
+    <header class="bg-amber-400 text-black w-full py-2 px-4 flex items-center justify-between shadow-md shadow-black">
+        <div class="flex items-center justify-center gap-2">
+            <img src="/icons/icon.png" alt="logo" class="h-10 rounded-full">
+            <a href="/" class="text-2xl text-white font-medium">Roluthentify</a>
+        </div>
+        <nav class="flex justify-center item-center gap-6 text-lg font-medium">
+            <a href="/guide" class="hover:text-white transition-colors duration-700 ease-in-out">Guide</a>
+            <a href="/about" class="hover:text-white transition-colors duration-700 ease-in-out">About</a>
+            <a href="/contact" class="hover:text-white transition-colors duration-700 ease-in-out">Contact</a>
+        </nav>
+        <div class="flex justify-center items-center gap-1 relative">
+            <% if (loggedIn) { %>
+                <img src="/icons/user.svg" alt="user" class="userAccountToggler h-8 w-8 cursor-pointer">
+                <div id="user-dropdown"
+                    class="flex-col justify-center items-center absolute top-[120%] text-xs hidden bg-white ring-1 rounded-sm">
+                    <a href="/profile"
+                        class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full rounded-t-sm">Profile</a>
+                    <% if (role==="admin" ) {%>
+                        <a href="/admin"
+                            class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full">Admin</a>
+                        <% } %>
+                            <a href="/logout"
+                                class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full rounded-b-sm">Logout</a>
+                </div>
+                <% } else { %>
+                    <a href="/login" class="hover:underline underline-offset-2">Login</a>/
+                    <a href="/register" class="hover:underline underline-offset-2">Register</a>
+                    <% } %>
+        </div>
+    </header>
 </body>
+<script src="/js/app.js"></script>
 
 </html>
