@@ -21,7 +21,7 @@ const verifyLogin = (req, res, next) => {
         req.userStatus = { loggedIn: false };
         return next();
       }
-      req.userStatus = { loggedIn: true, userId: userId };
+      req.userStatus = { loggedIn: true, userId: userId, role: userExist.role };
       return next();
     });
   } catch (error) {
