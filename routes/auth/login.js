@@ -71,7 +71,10 @@ router.post(
         secure: true
       });
     } else {
-      res.cookie("roluthentify_auth_token", authToken, { maxAge: 60000 });
+      res.cookie("roluthentify_auth_token", authToken, {
+        maxAge: 60000,
+        secure: true
+      });
     }
     res.redirect("/");
     try {
