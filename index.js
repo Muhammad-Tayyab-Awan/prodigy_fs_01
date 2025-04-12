@@ -8,6 +8,7 @@ const verifyLogin = require("./middleware/verifyLogin.js");
 const registerRoute = require("./routes/auth/register.js");
 const loginRoute = require("./routes/auth/login.js");
 const logoutRoute = require("./routes/auth/logout.js");
+const contactRoute = require("./routes/contact.js");
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 app.use("/register", registerRoute);
 app.use("/login", loginRoute);
 app.use("/logout", logoutRoute);
+app.use("/contact", contactRoute);
 
 app.all(/(.*)/, (req, res) => {
   const pageRequested = req.path.slice(1);
