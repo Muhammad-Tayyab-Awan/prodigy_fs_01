@@ -10,6 +10,7 @@ const loginRoute = require("./routes/auth/login.js");
 const logoutRoute = require("./routes/auth/logout.js");
 const contactRoute = require("./routes/contact.js");
 const profileRoute = require("./routes/profile.js");
+const adminRoute = require("./routes/admin.js");
 const PORT = process.env.PORT || 3000;
 const { input, password } = require("@inquirer/prompts");
 const bcrypt = require("bcryptjs");
@@ -41,6 +42,7 @@ app.use("/login", loginRoute);
 app.use("/logout", logoutRoute);
 app.use("/contact", contactRoute);
 app.use("/profile", profileRoute);
+app.use("/admin", adminRoute);
 
 app.all(/(.*)/, (req, res) => {
   const pageRequested = req.path.slice(1);
