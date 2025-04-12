@@ -11,6 +11,9 @@ const logoutRoute = require("./routes/auth/logout.js");
 const contactRoute = require("./routes/contact.js");
 const profileRoute = require("./routes/profile.js");
 const PORT = process.env.PORT || 3000;
+const { input, password } = require("@inquirer/prompts");
+const bcrypt = require("bcryptjs");
+const User = require("./models/Users.js");
 
 app.set("view engine", "ejs");
 app.use(cookieParser());
@@ -47,7 +50,24 @@ app.all(/(.*)/, (req, res) => {
 app.listen(PORT, async () => {
   console.clear();
   console.log(`Server is running on http://localhost:${PORT}`);
-  connectDB()
-    ? console.log("Connected to DB")
-    : console.log("DB connection failed");
+  if (connectDB()) {
+    console.log("Connected to DB");
+    const adminUsers = await User.findOne({ role: "admin", verified: true });
+    if (!adminUsers) {
+      let userData = {};
+      userData.username = await input({ message: "Enter username here : " });
+      userData.email = await input({ message: "Enter email here : " });
+      userData.password = await password({ message: "Enter password here : " });
+      userData.role = "admin";
+      userData.verified = true;
+      userData.password = bcrypt.hashSync(
+        userData.password,
+        await bcrypt.genSalt(10)
+      );
+      await User.create(userData);
+      console.log("Admin created");
+    }
+  } else {
+    console.log("DB connection failed");
+  }
 });
