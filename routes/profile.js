@@ -1,9 +1,13 @@
 const router = require("express").Router();
+const User = require("../models/Users.js");
 
 router.get("/", async (req, res) => {
   try {
     const { userStatus } = req;
     if (!userStatus.loggedIn) return res.redirect("/login");
+    const userInfo = await User.findById(userStatus.userId);
+    userStatus.email = userInfo.email;
+    userStatus.joinedOn = new Date(userInfo.createdAt).toUTCString();
     res.render("profile", userStatus);
   } catch (error) {
     res.render("error", {
