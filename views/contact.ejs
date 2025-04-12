@@ -89,10 +89,10 @@
                 action="/contact" method="POST">
                 <h1 class="text-xl font-medium py-3">Contact Us</h1>
                 <input type="text" autofocus required min="2" maxlength="30" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
-                    title="Only letters and spaces are allowed. No numbers or symbols."
+                    name="name" title="Only letters and spaces are allowed. No numbers or symbols."
                     class="w-[80%] bg-black p-3 rounded-md text-white focus-visible:outline-hidden text-center"
                     placeholder="Name here" autocomplete="name">
-                <input type="email" required
+                <input type="email" required name="email"
                     class="w-[80%] bg-black p-3 rounded-md text-white focus-visible:outline-hidden text-center"
                     placeholder="Email here" autocomplete="email">
                 <textarea name="message" placeholder="Enter your message here" required minlength="50" maxlength="500"
