@@ -17,4 +17,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/delete", async (req, res) => {
+  try {
+    const { userStatus } = req;
+    if (!userStatus.loggedIn) return res.redirect("/login");
+    await User.findByIdAndDelete(userStatus.userId);
+    res.clearCookie("roluthentify_auth_token");
+    res.redirect("/");
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
 module.exports = router;
