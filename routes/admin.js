@@ -22,4 +22,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/users", async (req, res) => {
+  try {
+    const { userStatus } = req;
+    if (!(userStatus.role === "admin"))
+      return res.redirect(`/${userStatus.loggedIn ? "profile" : "login"}`);
+    userStatus.data = { allUsers: await User.find().select("-password") };
+    res.render("users", userStatus);
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
 module.exports = router;
