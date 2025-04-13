@@ -968,6 +968,11 @@
       }
     }
   }
+  .sm\:px-0 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 0);
+    }
+  }
 }
 @property --tw-rotate-x {
   syntax: "*";
