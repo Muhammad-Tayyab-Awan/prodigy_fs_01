@@ -278,4 +278,37 @@ router.get("/contact-forms", async (req, res) => {
   }
 });
 
+router.get(
+  "/contact-forms/delete/:formId",
+  param("formId").isMongoId(),
+  async (req, res) => {
+    try {
+      const { userStatus } = req;
+      if (!(userStatus.role === "admin"))
+        return res.redirect(`/${userStatus.loggedIn ? "profile" : "login"}`);
+      const result = validationResult(req);
+      if (!result.isEmpty()) {
+        return res.status(404).render("error", {
+          error: "Invalid request",
+          message: `${result.errors.length} invalid values, please provide correct values`
+        });
+      }
+      const { formId } = req.params;
+      const formExist = await ContactForm.findById(formId);
+      if (!formExist)
+        return res.render("error", {
+          error: "Invalid request",
+          message: "No contact form exist with such id"
+        });
+      await ContactForm.findByIdAndDelete(formId);
+      res.redirect("/admin/contact-forms");
+    } catch (error) {
+      res.render("error", {
+        error: "Server side error occurred",
+        message: error
+      });
+    }
+  }
+);
+
 module.exports = router;
