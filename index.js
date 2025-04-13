@@ -59,6 +59,42 @@ app.get("/files/guide.pdf", (req, res) => {
   }
 });
 
+app.get("/about", (req, res) => {
+  try {
+    const { userStatus } = req;
+    res.render("about", userStatus);
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
+app.get("/terms", (req, res) => {
+  try {
+    const { userStatus } = req;
+    res.render("terms", userStatus);
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
+app.get("/privacy-policy", (req, res) => {
+  try {
+    const { userStatus } = req;
+    res.render("privacy-policy", userStatus);
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
 app.all(/(.*)/, (req, res) => {
   const pageRequested = req.path.slice(1);
   res.render("not-found", { pageRequested });
