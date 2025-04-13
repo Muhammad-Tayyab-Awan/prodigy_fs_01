@@ -46,6 +46,19 @@ app.use("/profile", profileRoute);
 app.use("/admin", adminRoute);
 app.use("/guide", guideRoute);
 
+app.get("/files/guide.pdf", (req, res) => {
+  try {
+    const { userStatus } = req;
+    if (!userStatus.loggedIn) return res.redirect("/login");
+    res.sendFile(path.join(__dirname, "/files/guide.pdf"));
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
 app.all(/(.*)/, (req, res) => {
   const pageRequested = req.path.slice(1);
   res.render("not-found", { pageRequested });
