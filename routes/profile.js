@@ -22,6 +22,16 @@ router.get("/delete", async (req, res) => {
   try {
     const { userStatus } = req;
     if (!userStatus.loggedIn) return res.redirect("/login");
+    if (userStatus.role === "admin") {
+      let adminCount = await User.find({ role: "admin" });
+      adminCount = adminCount.length;
+      if (adminCount === 1)
+        return res.render("error", {
+          error: "Operation failed",
+          message:
+            "You are the only admin so you can't delete your account, in order to delete first add another admin"
+        });
+    }
     await User.findByIdAndDelete(userStatus.userId);
     res.clearCookie("roluthentify_auth_token");
     res.redirect("/");
