@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Roluthentify</title>
+    <link rel="shortcut icon" href="/icons/icon.png" type="image/png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+    <header class="bg-amber-400 text-black w-full py-2 px-4 flex items-center justify-between">
+        <div class="flex items-center justify-center gap-2">
+            <img src="/icons/icon.png" alt="logo" class="h-10 rounded-full">
+            <a href="/" class="text-2xl text-white font-medium">Roluthentify</a>
+        </div>
+        <nav class="flex justify-center item-center gap-6 text-lg font-medium">
+            <% if (loggedIn) {%>
+                <a href="/guide" class="hover:text-white transition-colors duration-700 ease-in-out">Guide</a>
+                <% } %>
+                    <a href="/about" class="hover:text-white transition-colors duration-700 ease-in-out">About</a>
+                    <a href="/contact" class="hover:text-white transition-colors duration-700 ease-in-out">Contact</a>
+        </nav>
+        <div class="flex justify-center items-center gap-1 relative">
+            <% if (loggedIn) { %>
+                <img src="/icons/user.svg" alt="user" class="userAccountToggler h-8 w-8 cursor-pointer">
+                <div id="user-dropdown"
+                    class="flex-col justify-center items-center absolute top-[120%] text-xs hidden bg-white ring-1 rounded-sm z-10">
+                    <a href="/profile"
+                        class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full rounded-t-sm">Profile</a>
+                    <% if (role==="admin" ) {%>
+                        <a href="/admin"
+                            class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full">Admin</a>
+                        <% } %>
+                            <a href="/logout"
+                                class="p-1 hover:bg-amber-600 hover:text-white transition-all duration-700 ease-in-out w-full rounded-b-sm">Logout</a>
+                </div>
+                <% } else { %>
+                    <a href="/login" class="hover:underline underline-offset-2">Login</a>/
+                    <a href="/register" class="hover:underline underline-offset-2">Register</a>
+                    <% } %>
+        </div>
+    </header>
+    <main class="min-h-[calc(100vh-6rem)] w-full relative">
+        <div class="h-auto w-[75%] p-4 mx-auto">
+            <h1 class="text-2xl font-medium my-4">Terms & Conditions</h1>
+            <p>Effective Date: 13-04-2025</p>
+            <p class="text-justify leading-loose">
+                Welcome to Roluthentify! These Terms and Conditions ("Terms") govern your use of our website, tools,
+                tutorials, code
+                snippets, and all other services provided through roluthentify.com. By
+                accessing or using Roluthentify, you agree to comply with these Terms. If you do not agree, please
+                refrain from using
+                our services.
+            </p>
+            <h1 class="text-xl font-medium my-4">1. Use of Our Platform</h1>
+            <p class="text-justify leading-loose">
+                Roluthentify is designed to help developers build secure role-based authentication and authorization
+                systems using
+                <br>
+                JavaScript technologies. You are allowed to:
+                <br>
+                Access our tutorials and resources for personal or commercial development projects
+                <br>
+                Use and modify our open-source code snippets and examples
+                <br>
+                Share our platform with other developers, provided you link back to the original source
+                <br>
+                You may not:
+                <br>
+                Resell, repackage, or clone our content as your own
+                <br>
+                Use Roluthentify for any unlawful, harmful, or malicious activity
+                <br>
+                Attempt to gain unauthorized access to our platform or interfere with its operation
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                2. User Accounts
+            </h1>
+            <p class="text-justify leading-loose">
+                Some features (such as commenting, saving tutorials, or subscribing to newsletters) may require you to
+                create an
+                account.
+                <br>
+                By creating an account, you agree to:
+                <br>
+                Provide accurate information
+                <br>
+                Keep your login credentials confidential
+                <br>
+                Take full responsibility for activity under your account
+                <br>
+                We reserve the right to suspend or terminate accounts involved in suspicious or abusive behavior.
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                3. Intellectual Property
+            </h1>
+            <p class="text-justify leading-loose">
+                All content on Roluthentify—tutorials, designs, logos, branding, and original written materials—are the
+                intellectual
+                property of Roluthentify unless otherwise stated.
+                <br>
+                You can use our code for educational or project purposes
+                <br>
+                You cannot reproduce, distribute, or commercialize our tutorials or design assets without permission
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                4. Code Examples & Liability
+            </h1>
+            <p class="text-justify leading-loose">
+                Roluthentify provides sample code and tutorials for educational purposes. While we strive to ensure all
+                information is
+                accurate and secure:
+                <br>
+                We do not guarantee that the code will work perfectly in your specific use case
+                <br>
+                We are not responsible for any bugs, vulnerabilities, or damages caused by the implementation of our
+                code
+                <br>
+                You are responsible for testing, reviewing, and securing your own projects before deploying them
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                5. Third-Party Links
+            </h1>
+            <p class="text-justify leading-loose">
+                Some tutorials may reference or link to third-party services or packages (like npm modules, GitHub
+                repos, or external
+                blogs). We don’t control these external sites, so we’re not responsible for their content, privacy
+                practices, or
+                reliability. Proceed with caution and check their respective terms.
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                6. Updates & Modifications
+            </h1>
+            <p class="text-justify leading-loose">
+                We may update these Terms occasionally to reflect new features or changes in how the platform operates.
+                When we do,
+                we'll update the "Effective Date" above. Continued use of Roluthentify after changes means you accept
+                the updated terms.
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                7. Termination
+            </h1>
+            <p class="text-justify leading-loose">
+                We reserve the right to suspend access to our platform if you violate these Terms or misuse the
+                services. We aim to keep
+                Roluthentify safe, respectful, and valuable for everyone.
+            </p>
+            <h1 class="text-xl font-medium my-4">
+                8. Contact Us
+            </h1>
+            <p class="text-justify leading-loose">
+                Have questions, feedback, or need clarification? We’re here to help.
+                <br>
+                📧 Email us at: <a href="mailto:tayyabpasha1918@gmail.com">tayyabpasha1918@gmail.com</a>
+                <br>
+                🌐 Visit us: <a href="/contact">Contact Us</a>
+
+            </p>
+        </div>
+    </main>
+    <footer class="bg-amber-400 w-full px-4 py-2 flex justify-between items-center">
+        <p>Copyright &copy; | <span id="year"></span> | Roluthentify.com</p>
+        <div class="flex justify-center items-center gap-4"><a href="/terms">Terms & Conditions</a> <a
+                href="/privacy-policy">Privacy Policy</a></div>
+    </footer>
+</body>
+<script src="/js/app.js"></script>
+
+</html>
