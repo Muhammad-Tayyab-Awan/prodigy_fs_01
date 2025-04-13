@@ -163,6 +163,13 @@ router.get(
           error: "Invalid request",
           message: "No admin exist with such id"
         });
+      let allAdmins = await User.find({ role: "admin" }).select("-password");
+      if (allAdmins.length === 1)
+        return res.render("error", {
+          error: "Operation failed",
+          message:
+            "You are the only admin so you can't delete your account, in order to delete first add another admin"
+        });
       await User.findByIdAndDelete(userId);
       res.redirect("/admin/admins");
     } catch (error) {
