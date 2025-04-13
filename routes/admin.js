@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { param, validationResult } = require("express-validator");
+const { param, validationResult, body } = require("express-validator");
+const bcrypt = require("bcryptjs");
 const User = require("../models/Users.js");
 
 router.get("/", async (req, res) => {
@@ -194,5 +195,70 @@ router.get("/add", async (req, res) => {
     });
   }
 });
+
+router.post(
+  "/admins/add",
+  [
+    body("username")
+      .matches(/^(?=.*[a-z])(?=.*\d)[a-z\d]+$/)
+      .isLength({ min: 6, max: 20 }),
+    body("email").isEmail(),
+    body("password")
+      .isStrongPassword({
+        minLowercase: 3,
+        minUppercase: 2,
+        minNumbers: 2,
+        minSymbols: 1,
+        minLength: 8
+      })
+      .isLength({ max: 18 })
+  ],
+  async (req, res) => {
+    try {
+      const { userStatus } = req;
+      if (!(userStatus.role === "admin"))
+        return res.redirect(`/${userStatus.loggedIn ? "profile" : "login"}`);
+      const result = validationResult(req);
+      if (!result.isEmpty()) {
+        return res.status(404).render("error", {
+          error: "Invalid request",
+          message: `${result.errors.length} invalid values, please provide correct values`
+        });
+      }
+      const { username, email, password } = req.body;
+      const usernameExist = await User.findOne({ username: username });
+      const userEmailExist = await User.findOne({ email: email });
+      if (userEmailExist && usernameExist)
+        return res.status(404).render("error", {
+          error: "Invalid request",
+          message: `User already exist with this email and username`
+        });
+      if (usernameExist || userEmailExist)
+        return res.status(404).render("error", {
+          error: "Invalid request",
+          message: `User already exist with this ${
+            usernameExist ? "username" : "email"
+          }`
+        });
+      const hashedPassword = bcrypt.hashSync(
+        password,
+        await bcrypt.genSalt(10)
+      );
+      await User.create({
+        username,
+        email,
+        password: hashedPassword,
+        role: "admin",
+        verified: true
+      });
+      res.status(200).redirect("/admin/admins");
+    } catch (error) {
+      res.render("error", {
+        error: "Server side error occurred",
+        message: error
+      });
+    }
+  }
+);
 
 module.exports = router;
