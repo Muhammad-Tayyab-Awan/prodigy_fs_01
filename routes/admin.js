@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { param, validationResult, body } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const User = require("../models/Users.js");
+const ContactForm = require("../models/ContactForm.js");
 
 router.get("/", async (req, res) => {
   try {
@@ -260,5 +261,21 @@ router.post(
     }
   }
 );
+
+router.get("/contact-forms", async (req, res) => {
+  try {
+    const { userStatus } = req;
+    if (!(userStatus.role === "admin"))
+      return res.redirect(`/${userStatus.loggedIn ? "profile" : "login"}`);
+    const contactForms = await ContactForm.find();
+    userStatus.data = { contactForms };
+    res.render("contact-forms", userStatus);
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
 
 module.exports = router;
