@@ -3,6 +3,10 @@ const { param, validationResult, body } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const User = require("../models/Users.js");
 const ContactForm = require("../models/ContactForm.js");
+const fs = require("node:fs/promises");
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.get("/", async (req, res) => {
   try {
@@ -317,6 +321,31 @@ router.get("/update-guide", async (req, res) => {
     if (!(userStatus.role === "admin"))
       return res.redirect(`/${userStatus.loggedIn ? "profile" : "login"}`);
     res.render("update-guide", userStatus);
+  } catch (error) {
+    res.render("error", {
+      error: "Server side error occurred",
+      message: error
+    });
+  }
+});
+
+router.post("/update-guide", upload.single("guide"), async (req, res) => {
+  try {
+    const { userStatus } = req;
+    if (!(userStatus.role === "admin"))
+      return res.redirect(`/${userStatus.loggedIn ? "profile" : "login"}`);
+    if (!req.file)
+      return res.render("error", {
+        error: "Invalid request",
+        message: "No file uploaded please upload a file"
+      });
+    if (req.file.mimetype !== "application/pdf")
+      return res.render("error", {
+        error: "Invalid request",
+        message: "We only accept pdf file"
+      });
+    await fs.writeFile("public/files/uploads/guide.pdf", req.file.buffer);
+    res.redirect("/guide");
   } catch (error) {
     res.render("error", {
       error: "Server side error occurred",
