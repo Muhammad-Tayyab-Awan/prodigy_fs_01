@@ -102,7 +102,6 @@ app.all(/(.*)/, (req, res) => {
 
 app.listen(PORT, async () => {
   console.clear();
-  console.log(`Server is running on http://localhost:${PORT}`);
   if (connectDB()) {
     console.log("Connected to DB");
     const adminUsers = await User.findOne({ role: "admin", verified: true });
@@ -110,7 +109,9 @@ app.listen(PORT, async () => {
       let userData = {};
       userData.username = await input({ message: "Enter username here : " });
       userData.email = await input({ message: "Enter email here : " });
-      userData.password = await password({ message: "Enter password here : " });
+      userData.password = await password({
+        message: "Enter password here : "
+      });
       userData.role = "admin";
       userData.verified = true;
       userData.password = bcrypt.hashSync(
@@ -123,4 +124,5 @@ app.listen(PORT, async () => {
   } else {
     console.log("DB connection failed");
   }
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
