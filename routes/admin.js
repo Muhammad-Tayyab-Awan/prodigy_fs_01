@@ -344,7 +344,7 @@ router.post("/update-guide", upload.single("guide"), async (req, res) => {
         error: "Invalid request",
         message: "We only accept pdf file"
       });
-    await fs.writeFile("public/files/uploads/guide.pdf", req.file.buffer);
+    await fs.writeFile("files/guide.pdf", req.file.buffer);
     res.redirect("/guide");
   } catch (error) {
     res.render("error", {
